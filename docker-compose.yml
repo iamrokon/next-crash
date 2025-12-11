@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    user: "root"
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=200
+      - WATCHPACK_POLLING=true
+      - WATCHPACK_FORCE_POLLING=true
+      - NEXT_WEBPACK_USEPOLLING=true
+      - NEXT_DISABLE_TURBOPACK=1
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+        consistency: delegated
+      - /app/node_modules
